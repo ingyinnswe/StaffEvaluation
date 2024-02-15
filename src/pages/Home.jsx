@@ -1,8 +1,22 @@
-import React from 'react'
+import React from 'react';
+import infoData from './infoData';
+import Info from './Info';
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div className="md:container md:mx-auto">
+      <div className="gap-8 columns-4 mx-auto my-20">
+      {infoData.map((info, index) => (
+        <Info
+          key={index}
+          imageURL={info.imageURL}
+          name={info.name}
+          nickname={info.nickname}
+          jobTitle={info.jobTitle}
+        />
+      ))}
+      </div>
+    </div>
   )
 }
 

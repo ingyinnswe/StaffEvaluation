@@ -1,27 +1,25 @@
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function signIn() {
-  let history = useHistory();
+    let navigate = useNavigate();
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // Add your sign in logic here
+        // After sign in logic, navigate to home page
+        navigate('/');
+    }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Add your sign in logic here
-    // After sign in logic, navigate to home page
-    history.push('/home');
-  }
-
-  return (
-    <div>
-      <h1>Sign In</h1>
-        <form onSubmit={handleSubmit}>
-            <label>
-            Username:
-            <input type="text" name="username" />
-            </label>
-            <button type="submit">Sign In</button>
-        </form>
-    </div>
-  );
-}
+    return (
+        <div className='flex justify-center items-center h-screen'>
+            <form onSubmit={handleSubmit} className='flex flex-col justify-center m-10'>
+                <label>
+                Username:
+                <input type="text" name="username" className=""/>
+                </label>
+                <button type="submit" className='bg-black text-white'>Sign In</button>
+            </form>
+        </div>
+    );
+    }
 
 export default signIn;
