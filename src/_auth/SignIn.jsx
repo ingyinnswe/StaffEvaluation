@@ -1,25 +1,17 @@
-// SignIn.jsx
+
 
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import "./SignIn.css";
 
 function SignIn() {
-  let navigate = useNavigate();
-
-  function handleSubmit () {
-    // Perform your form submission logic here
-
-    // Redirect to the Info page
-    navigate.push("/info");
-  };
-
+ 
   return (
     <div>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-36 w-auto logo"
-            src="/ric-logo.png"
+            src="./src/assets/ric-logo.png"
             alt="RIC logo"
           />
         </div>
@@ -48,7 +40,7 @@ function SignIn() {
             <div>
               <button
                 type="submit"
-                onClick={handleSubmit}
+                // onClick={handleSubmit}
                 className="flex w-full rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign in
