@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function Info(props) {
   return (
-    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-full h-90 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-20">
       <img
         src={props.imageURL}
         alt="Profile"
