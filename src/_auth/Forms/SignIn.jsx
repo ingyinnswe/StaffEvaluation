@@ -28,7 +28,7 @@ function SignIn() {
               <div className="mt-2">
                 <input
                   id="staffId"
-                  name="staffId"
+                  name="username"
                   type="text"
                   placeholder="12345678"
                   autoComplete="text"
