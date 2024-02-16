@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
 function signIn() {
-    
   let navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
