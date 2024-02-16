@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function Info(props) {
   return (
-    <div className="w-full h-90 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-20">
+    <div className="w-full h-[600px] max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-20">
       <img
         src={props.imageURL}
         alt="Profile"
@@ -20,25 +20,25 @@ function Info(props) {
         <div className="my-4">
           <a
             type="button"
-            class="text-gray-900 bg-gray-300 hover:bg-gray-500 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
+            className="text-gray-900 bg-gray-300 hover:bg-gray-500 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
           >
             Euphoric
           </a>
           <a
             type="button"
-            class="text-gray-900 bg-gray-300 hover:bg-gray-500  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
+            className="text-gray-900 bg-gray-300 hover:bg-gray-500  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
           >
             Innovative
           </a>
           <button
             type="button"
-            class="text-gray-900 bg-gray-300 hover:bg-gray-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
+            className="text-gray-900 bg-gray-300 hover:bg-gray-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
           >
             Supervision
           </button>
           <button
             type="button"
-            class="text-gray-900 bg-gray-300 hover:bg-gray-500 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
+            className="text-gray-900 bg-gray-300 hover:bg-gray-500 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
           >
             Counter Balance
           </button>
