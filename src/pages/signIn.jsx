@@ -29,9 +29,16 @@ function signIn() {
           </label>
           <input
             type="text"
+            inputMode="numeric"
             name="username"
             placeholder="12345678"
+            maxLength={8}
             required
+            pattern="[0-9]{8}"
+            onInput={(e) => {
+                // Allow only numeric characters
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+              }}
             className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
 
