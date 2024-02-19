@@ -1,6 +1,6 @@
 import React from 'react';
 import infoData from './infoData';
-import Info from './Info';
+import Info from './UserProfileCard';
 
 const Home = () => {
   return (
