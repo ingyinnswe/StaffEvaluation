@@ -24,7 +24,7 @@ const Popup = ({ imageURL,name, jobTitle, nickname, onClose }) => {
             <img
               src={imageURL}
               alt="Profile"
-              className="mx-auto rounded-2xl w-auto h-36 p-4"
+              className="mx-auto rounded-2xl w-auto h-56 p-4"
             />
             <h4 className="mb-3 text-lg font-semibold">{name}</h4>
             <p className="mb-2 text-sm text-gray-600">{jobTitle}</p>
