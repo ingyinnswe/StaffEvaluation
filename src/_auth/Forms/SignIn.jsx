@@ -1,13 +1,35 @@
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserIdContext } from '@/App';
+import { isElementAccessExpression } from "typescript";
 
 function signIn() {
   let navigate = useNavigate();
-  const handleSubmit = (event) => {
+  const API_URL = import.meta.env.VITE_API_URL;
+  const { userId, setUserId } = useContext(UserIdContext);
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    // Add your sign in logic here
-    // After sign in logic, navigate to home page
-    navigate("/home");
-  };
+    const username = event.target.username.value;
+    const response = await fetch(`${API_URL}/api/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username }),
+    });
+    if(response.ok){
+      const data = await response.json();
+      if (data.userId){
+        setUserId(data.userId);
+        navigate("/home");
+      }
+      else{
+        console.log(data.message)
+      }
+  } else{
+    console.error('Request failed');
+  }
+}
 
   return (
     <div className="flex h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -31,10 +53,10 @@ function signIn() {
             type="text"
             inputMode="numeric"
             name="username"
-            placeholder="12345678"
-            maxLength={8}
+            placeholder="1234567"
+            maxLength={7}
             required
-            pattern="[0-9]{8}"
+            pattern="[0-9]{7}"
             onInput={(e) => {
                 // Allow only numeric characters
                 e.target.value = e.target.value.replace(/[^0-9]/g, '');

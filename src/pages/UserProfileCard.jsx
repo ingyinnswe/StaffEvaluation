@@ -21,7 +21,7 @@ const UserProfileCard = (props) => {
       <img
         src={props.imageURL}
         alt="Profile"
-        className="mx-auto rounded-2xl w-full p-4"
+        className="mx-auto rounded-2xl w-full h-56 p-4"
       />
       <div className="px-5 pb-4">
         <h3 className="mt-6 text-lg font-semibold leading-8 tracking-tight text-black">

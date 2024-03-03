@@ -7,13 +7,20 @@ import AdminControl from "./admin/AdminControl";
 import AdminCreate from "./admin/AdminCreate";
 import AdminGet from "./admin/AdminGet";
 import AdminUpdateProfile from "./admin/AdminUpdateProfile";
+import { User } from "lucide-react";
 
 export const TokenContext = createContext();
+export const UserIdContext = createContext();
+export const UserDataContext = createContext();
 
 function App() {
   const [token, setToken] = useState('');
+  const [userId, setUserId] = useState('');
+  const [userData, setUserData] = useState([]);
   return (
     <TokenContext.Provider value={{ token, setToken }}>
+    <UserIdContext.Provider value={{ userId, setUserId }}>
+    <UserDataContext.Provider value={{userData, setUserData}}>
     <Router>
       <Routes>
         <Route path="/home" element={<Home />} />
@@ -25,6 +32,8 @@ function App() {
         <Route path="/admin/control/update" element={<AdminUpdateProfile/>} />
       </Routes>
     </Router>
+    </UserDataContext.Provider>
+    </UserIdContext.Provider>
     </TokenContext.Provider>
   );
 }

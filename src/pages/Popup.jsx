@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useContext} from "react";
+import { UserIdContext, UserDataContext} from '@/App';
 
 const Popup = ({ imageURL,name, jobTitle, nickname, onClose }) => {
 
