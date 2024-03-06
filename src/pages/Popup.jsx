@@ -29,7 +29,9 @@ const Popup = ({ imageURL,name, jobTitle, nickname, onClose }) => {
             />
             <h4 className="mb-3 text-lg font-semibold">{name}</h4>
             <p className="mb-2 text-sm text-gray-600">{jobTitle}</p>
-            <p className="mb-4 text-base text-gray-800">{nickname}</p>
+            <p className="mb-4 text-base font-semibold text-gray-800">{nickname}</p>
+            <p className="mb-4 text-green-600 text-sm italic">He finds an inspiring haven where passion and productivity seamlessly converge at his workspace.</p>
+            
 
             {/* rating buttons */}
             <a type="button" onClick={storeRate} className="mr-2 mb-2 hover:bg-violet-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-1.png" alt="" srcset="" /></a>
