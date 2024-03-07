@@ -7,7 +7,6 @@ import AdminControl from "./admin/AdminControl";
 import AdminCreate from "./admin/AdminCreate";
 import AdminGet from "./admin/AdminGet";
 import AdminUpdateProfile from "./admin/AdminUpdateProfile";
-import { User } from "lucide-react";
 
 export const TokenContext = createContext();
 export const UserIdContext = createContext();
