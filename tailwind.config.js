@@ -1,11 +1,12 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{js,jsx}',
-    './components/**/*.{js,jsx}',
-    './app/**/*.{js,jsx}',
-    './src/**/*.{js,jsx}',
+    "./pages/**/*.{js,jsx}",
+    "./components/**/*.{js,jsx}",
+    "./app/**/*.{js,jsx}",
+    "./src/**/*.{js,jsx}",
   ],
   prefix: "",
   theme: {
@@ -73,5 +74,21 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-}
+  plugins: [
+    require("tailwindcss-animate"),
+
+    // eslint-disable-next-line global-require
+    require("@tailwindcss/forms"),
+    // add custom variant for expanding sidebar
+    plugin(({ addVariant, e }) => {
+      addVariant("sidebar-expanded", ({ modifySelectors, separator }) => {
+        modifySelectors(
+          ({ className }) =>
+            `.sidebar-expanded .${e(
+              `sidebar-expanded${separator}${className}`
+            )}`
+        );
+      });
+    }),
+  ],
+};
