@@ -30,9 +30,39 @@ const AdminControl = () => {
   const handleCreateUserClick = () => {
     navigate("/admin/control/create");
   };
-//   const handleGetUserClick = () => {
-//     navigate("/admin/control/get");
-//   };
+  //   const handleGetUserClick = () => {
+  //     navigate("/admin/control/get");
+  //   };
+  const handleDeleteUserClick = async (username) => {
+    try {
+      const response = await fetch(`${API_URL}/api/admin/users/${username}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("Response status:", response.status);
+
+      if (response.ok) {
+        // Delete user from returnData
+        const updatedData = { ...returnData };
+        // Assuming each user has a unique username
+        const userIdToDelete = Object.keys(updatedData).find(
+          (key) => updatedData[key].username === username
+        );
+        delete updatedData[userIdToDelete];
+        setReturnData(updatedData);
+        console.log("User deleted successfully");
+      } else {
+        const errorData = await response.json(); // Assuming server returns JSON error messages
+        console.error("Failed to delete user. Server error:", errorData);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   const handleUpdateProfileClick = () => {
     navigate("/admin/control/update");
   };
@@ -157,7 +187,7 @@ const AdminControl = () => {
                             />
                           </svg>
                         </button>
-                        <button className="p-2">
+                        <button onClick={handleDeleteUserClick} className="p-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -165,6 +195,7 @@ const AdminControl = () => {
                             strokeWidth={1.5}
                             stroke="currentColor"
                             className="w-4 h-4 text-red-700"
+                            id="delete"
                           >
                             <path
                               strokeLinecap="round"
@@ -181,7 +212,7 @@ const AdminControl = () => {
               </table>
             ) : (
               <div className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 p-4">
-                "Loading..."    
+                No data to display
               </div>
             )}
           </div>
