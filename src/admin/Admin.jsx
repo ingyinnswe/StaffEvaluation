@@ -30,9 +30,9 @@ const AdminControl = () => {
   const handleCreateUserClick = () => {
     navigate("/admin/control/create");
   };
-  const handleGetUserClick = () => {
-    navigate("/admin/control/get");
-  };
+//   const handleGetUserClick = () => {
+//     navigate("/admin/control/get");
+//   };
   const handleUpdateProfileClick = () => {
     navigate("/admin/control/update");
   };
@@ -66,34 +66,68 @@ const AdminControl = () => {
               Update Profile
             </button>
           </div>
-          <div className="flex flex-auto my-8">
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg my-8">
             {returnData ? (
-              <table className="w-full">
-                <thead>
+              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                   <tr className="border text-indigo-600">
-                    <th>User ID</th>
-                    <th>Username</th>
-                    <th>Name</th>
-                    <th>Voted For</th>
-                    <th>Actions</th>
+                    <th scope="col" className="px-6 py-3">
+                      User ID
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Username
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Name
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Voted For
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Actions
+                    </th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className=" border">
                   {Object.keys(returnData).map((userId) => (
-                    <tr key={userId}>
-                      <td>{userId}</td>
-                      <td>{returnData[userId].username}</td>
-                      <td>{returnData[userId].name}</td>
-                      <td></td>
-                      <td>
-                        <button>
+                    <tr
+                      key={userId}
+                      className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 "
+                    >
+                      <td
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      >
+                        {userId}
+                      </td>
+                      <td
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      >
+                        {returnData[userId].username}
+                      </td>
+                      <td
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      >
+                        {returnData[userId].name}
+                      </td>
+                      <td
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      ></td>
+                      <td
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      >
+                        <button className="p-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
                             stroke="currentColor"
-                            className="w-6 h-6"
+                            className="w-4 h-4 text-oragne-800"
                           >
                             <path
                               strokeLinecap="round"
@@ -107,7 +141,7 @@ const AdminControl = () => {
                             />
                           </svg>
                         </button>
-                        <button>
+                        <button className="p-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -123,14 +157,14 @@ const AdminControl = () => {
                             />
                           </svg>
                         </button>
-                        <button>
+                        <button className="p-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
                             stroke="currentColor"
-                            className="w-6 h-6"
+                            className="w-4 h-4 text-red-700"
                           >
                             <path
                               strokeLinecap="round"
@@ -146,7 +180,9 @@ const AdminControl = () => {
                 </tbody>
               </table>
             ) : (
-              "Loading..."
+              <div className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 p-4">
+                "Loading..."    
+              </div>
             )}
           </div>
         </div>
