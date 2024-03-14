@@ -4,6 +4,7 @@ import { TokenContext } from "../App";
 import WelcomeBanner from "../partials/dashboard/WelcomeBanner";
 import DashboardCard04 from "../partials/dashboard/DashboardCard04";
 import DashboardCard05 from "../partials/dashboard/DashboardCard05";
+import DashboardCard06 from "@/partials/dashboard/DashboardCard06";
 
 const AdminControl = () => {
   let navigate = useNavigate();
@@ -72,7 +73,7 @@ const AdminControl = () => {
         <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
           <WelcomeBanner />
           <div className="grid grid-cols-12 gap-6">
-            <DashboardCard05 />
+            <DashboardCard06 />
             <DashboardCard04 />
           </div>
 
@@ -98,7 +99,7 @@ const AdminControl = () => {
           </div>
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg my-8">
             {returnData ? (
-              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <table className="table-fixed w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                   <tr className="border text-indigo-600">
                     <th scope="col" className="px-6 py-3">
@@ -111,7 +112,19 @@ const AdminControl = () => {
                       Name
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Voted For
+                     Euphoric
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                     Innovative
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                     Counterbalance
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                     Supervision
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                     Self-motivations
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Actions
@@ -149,6 +162,22 @@ const AdminControl = () => {
                       <td
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      ></td>
+                      <td
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      ></td>
+                      <td
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      ></td>
+                      <td
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      ></td>
+                      <td
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
                         <button className="p-2">
                           <svg
@@ -171,7 +200,7 @@ const AdminControl = () => {
                             />
                           </svg>
                         </button>
-                        <button className="p-2">
+                        {/* <button className="p-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -186,7 +215,7 @@ const AdminControl = () => {
                               d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
                             />
                           </svg>
-                        </button>
+                        </button> */}
                         <button onClick={handleDeleteUserClick} className="p-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
