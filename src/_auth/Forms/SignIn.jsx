@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState} from "react";
 import { UserIdContext } from '@/App';
 // import { isElementAccessExpression } from "typescript";
 
@@ -7,8 +7,10 @@ function signIn() {
   let navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
   const { userId, setUserId } = useContext(UserIdContext);
+  const [loading, setLoading ] = useState(false);
   const handleSubmit = async(event) => {
     event.preventDefault();
+    setLoading(true);
     const username = event.target.username.value;
     const response = await fetch(`${API_URL}/api/users/login`, {
       method: "POST",
@@ -19,6 +21,7 @@ function signIn() {
     });
     if(response.ok){
       const data = await response.json();
+      setLoading(false);
       if (data.userId){
         setUserId(data.userId);
         navigate("/home");
@@ -27,6 +30,7 @@ function signIn() {
         console.log(data.message)
       }
   } else{
+    setLoading(false);
     console.error('Request failed');
   }
 }
@@ -64,8 +68,8 @@ function signIn() {
             className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
 
-          <button type="submit" className="flex justify-center w-full mt-5 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-            Sign In
+          <button type="submit" className="flex justify-center w-full mt-5 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" disabled={loading}>
+            {loading ? "Loading..." : "Sign In"}
           </button>
         </form>
       </div>
