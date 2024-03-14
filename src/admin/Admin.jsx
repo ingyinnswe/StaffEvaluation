@@ -1,33 +1,41 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState , useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { TokenContext } from "../App";
 import WelcomeBanner from "../partials/dashboard/WelcomeBanner";
 import DashboardCard04 from "../partials/dashboard/DashboardCard04";
 import DashboardCard05 from "../partials/dashboard/DashboardCard05";
 import DashboardCard06 from "@/partials/dashboard/DashboardCard06";
+import useTotalRatings from "./useTotalRating";
 
 const AdminControl = () => {
   let navigate = useNavigate();
   const { token } = useContext(TokenContext);
   const [returnData, setReturnData] = useState(null);
   const API_URL = import.meta.env.VITE_API_URL;
-  const handleGetUsers = async () => {
-    try {
-      console.log(API_URL);
-      const response = await fetch(`${API_URL}/api/admin/users`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  useEffect(()=>{
+    const getAllUsers = async () => {
+      try {
+            const response = await fetch(`${API_URL}/api/admin/users`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+      
+            const data = await response.json();
+            setReturnData(data);
+          } catch (error) {
+            console.error("Error:", error);
+          }
+    };
+    getAllUsers();
+  },[]);
+  const totalRatings = useTotalRatings(returnData);
 
-      const data = await response.json();
-      setReturnData(data);
-
-      console.log("data", data);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+  useEffect(() => {
+    console.log("Total Ratings:", totalRatings);
+  }, [totalRatings]);
+  //for the purpose of checking total ratings. must be removed
+  
   const handleCreateUserClick = () => {
     navigate("/admin/control/create");
   };
@@ -84,12 +92,12 @@ const AdminControl = () => {
             >
               Create User
             </button>
-            <button
+            {/*<button
               className="mx-2 flex justify-center w-auto mt-5 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               onClick={handleGetUsers}
             >
               Get User
-            </button>
+  </button>*/}
             <button
               className="mx-2 flex justify-center w-auto mt-5 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               onClick={handleUpdateProfileClick}

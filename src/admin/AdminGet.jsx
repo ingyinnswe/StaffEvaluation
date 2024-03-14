@@ -1,27 +1,27 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TokenContext } from "../App";
 
 const AdminGet = () => {
   const { token } = useContext(TokenContext);
   const [returnData, setReturnData] = useState(null);
   const API_URL = import.meta.env.VITE_API_URL;
-  const handleGetUsers = async () => {
-    try {
-      console.log(API_URL);
-      const response = await fetch(`${API_URL}/api/admin/users`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  // const handleGetUsers = async () => {
+  //   try {
+  //     console.log(API_URL);
+  //     const response = await fetch(`${API_URL}/api/admin/users`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
 
-      const data = await response.json();
-      setReturnData(data);
+  //     const data = await response.json();
+  //     setReturnData(data);
       
-      console.log("data",data);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+  //     console.log("data",data);
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
   return (
     <div className="flex  w-full h-screen  justify-center px-6 py-12 lg:px-8">
       <div className="w-full">

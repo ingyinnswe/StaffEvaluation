@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect} from 'react';
 import { TokenContext } from '../App';
 import { useNavigate } from 'react-router-dom';
+import logo from '../assets/ric-logo.png';
 
 function AdminLogin() {
   const [loading, isLoading] = useState(false); 
@@ -39,7 +40,7 @@ function AdminLogin() {
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           className="mx-auto h-36 w-auto logo"
-          src="./src/assets/ric-logo.png"
+          src={logo}
           alt="RIC logo"></img>
       <form onSubmit={handleLogin} className="flex flex-col justify-center m-10">
         <label>
