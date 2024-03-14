@@ -6,6 +6,7 @@ import { UserIdContext, UserDataContext } from "@/App";
 const UserProfileCard = () => {
   const { userId } = useContext(UserIdContext);
   const { userData, setUserData } = useContext(UserDataContext);
+  const [variable, setVariable] = useState('');
   const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
@@ -26,7 +27,8 @@ const UserProfileCard = () => {
     setSelectedUser(selectedUser === id ? null : id);
   };
 
-  const openPopup = () => {
+  const openPopup = (v) => {
+    setVariable(v);
     setShowPopup(true);
     console.log("open popup");
   };
@@ -36,19 +38,19 @@ const UserProfileCard = () => {
 
   return (
     <>
-      {infoData.map((info, index) => (
+      {userData.map((info, index) => (
         <div
-          id={info.id}
+          id={info._id}
           key={index}
           className={`baseCard w-full h-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-20
         `}
         >
           <img
-            src={info.imageURL}
+            src={info.profilePicture}
             alt={info.name}
             srcSet=""
             className="mx-auto rounded-2xl "
-            onClick={() => handleClick(info.id)}
+            onClick={() => handleClick(info._id)}
           />
           {/* <div className="px-5 pb-4">
           <h3 className="mt-6 text-lg font-semibold leading-8 tracking-tight text-black">
@@ -59,34 +61,34 @@ const UserProfileCard = () => {
         </div> */}
 
           {/*  motivations and self-confidence */}
-          {selectedUser === info.id && (
+          {selectedUser === info._id && (
             <div
               className={`motivationBtn px-4 transition-all duration-500 max-h-40 opacity-100`}
-              id={info.id}
+              id={info._id}
             >
               <a
-                onClick={openPopup}
+                onClick={()=>openPopup('Euphoric')}
                 type="button"
                 className="text-gray-900 bg-green-200 hover:text-white hover:bg-green-500 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2 "
               >
                 Euphoric
               </a>
               <a
-                onClick={openPopup}
+                onClick={()=>openPopup('Innovative')}
                 type="button"
                 className="text-gray-900 bg-orange-200 hover:text-white hover:bg-orange-500  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
               >
                 Innovative
               </a>
               <a
-                onClick={openPopup}
+                onClick={()=> openPopup('Supervision')}
                 type="button"
                 className="text-gray-900 bg-pink-200 hover:text-white hover:bg-pink-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
               >
                 Supervision
               </a>
               <a
-                onClick={openPopup}
+                onClick={()=>openPopup('Counter Balance')}
                 type="button"
                 className="text-gray-900 bg-blue-200 hover:text-white hover:bg-blue-500 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
               >
@@ -94,7 +96,9 @@ const UserProfileCard = () => {
               </a>
               {showPopup && (
                 <Popup
-                  imageURL={info.imageURL}
+                  imageURL={info.profilePicture}
+                  votedFor={info._id}
+                  variable={variable}
                   name={info.name}
                   jobTitle={info.jobTitle}
                   nickname={info.nickname}

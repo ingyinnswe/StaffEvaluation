@@ -26,12 +26,10 @@ function signIn() {
         setUserId(data.userId);
         navigate("/home");
       }
-      else{
-        console.log(data.message)
-      }
   } else{
+    const data = await response.json();
     setLoading(false);
-    console.error('Request failed');
+    alert(data.message);
   }
 }
 
