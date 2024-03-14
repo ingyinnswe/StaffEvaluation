@@ -1,10 +1,28 @@
 import React, {useContext} from "react";
 import { UserIdContext, UserDataContext} from '@/App';
 
-const Popup = ({ imageURL,name, jobTitle, nickname, onClose }) => {
-
-    const storeRate = () => { 
-        console.log('store rate');
+const Popup = ({ imageURL,votedFor, variable, name, jobTitle, nickname, onClose }) => {
+    const API_URL = import.meta.env.VITE_API_URL;
+    const { userId } = useContext(UserIdContext);
+    const storeRate = (rating) => {
+        const fetchData = async () => {
+          console.log(JSON.stringify({ userId, votedFor, variable, rating}))
+            const response = await fetch(`${API_URL}/api/votes`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userId, votedFor, variable, rating}),
+            });
+            const data = await response.json();
+            if(response.ok){
+              alert("Voting submitted successfully");
+            }
+            else{
+              alert(`Voting failed ${data.msg}`)
+            }
+        };
+        fetchData();
     }
   return (
     <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -34,11 +52,11 @@ const Popup = ({ imageURL,name, jobTitle, nickname, onClose }) => {
             
 
             {/* rating buttons */}
-            <a type="button" onClick={storeRate} className="mr-2 mb-2 hover:bg-violet-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-1.png" alt="" srcset="" /></a>
-            <a type="button" onClick={storeRate} className="mr-2 mb-2 hover:bg-sky-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-2.png" alt="" srcset="" /></a>
-            <a type="button" onClick={storeRate} className="mr-2 mb-2 hover:bg-green-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-3.png" alt="" srcset="" /></a>
-            <a type="button" onClick={storeRate} className="mr-2 mb-2 hover:bg-orange-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-4.png" alt="" srcset="" /></a>
-            <a type="button" onClick={storeRate} className="mr-2 mb-2 hover:bg-red-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-5.png" alt="" srcset="" /></a>
+            <a type="button" onClick={()=>storeRate(1)} className="mr-2 mb-2 hover:bg-violet-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-1.png" alt="" srcset="" /></a>
+            <a type="button" onClick={()=>storeRate(2)} className="mr-2 mb-2 hover:bg-sky-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-2.png" alt="" srcset="" /></a>
+            <a type="button" onClick={()=>storeRate(3)} className="mr-2 mb-2 hover:bg-green-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-3.png" alt="" srcset="" /></a>
+            <a type="button" onClick={()=>storeRate(4)} className="mr-2 mb-2 hover:bg-orange-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-4.png" alt="" srcset="" /></a>
+            <a type="button" onClick={()=>storeRate(5)} className="mr-2 mb-2 hover:bg-red-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-5.png" alt="" srcset="" /></a>
             
           </div>
           <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
