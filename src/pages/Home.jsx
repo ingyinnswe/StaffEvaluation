@@ -21,17 +21,7 @@ const Home = () => {
 
   return (
     <div className="md:container md:mx-auto">
-      <div className="gap-8 flex flex-wrap my-20 text-center justify-center">
-      {/* {userData.map((user, index) => (
-        <Info
-          key={index}
-          imageURL={user.profilePicture}
-          // name={info.name}
-          // nickname={info.nickname}
-          // jobTitle={info.jobTitle}
-        />
-      ))} */}
-      
+      <div className="grid grid-cols-5 gap-8 my-16 text-center justify-center">    
       <Info
       />
       </div>

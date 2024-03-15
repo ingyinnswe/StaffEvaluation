@@ -1,6 +1,11 @@
 import React, { useContext } from "react";
 import { UserIdContext, UserDataContext } from "@/App";
 import { questionSets } from "./questionSets";
+import emo1 from "@/assets/Emotions/emo-1.png";
+import emo2 from "@/assets/Emotions/emo-2.png";
+import emo3 from "@/assets/Emotions/emo-3.png";
+import emo4 from "@/assets/Emotions/emo-4.png";
+import emo5 from "@/assets/Emotions/emo-5.png";
 
 const Popup = ({
   imageURL,
@@ -87,35 +92,35 @@ const Popup = ({
               onClick={() => storeRate(1)}
               className="mr-2 mb-2 hover:bg-violet-200 p-2 rounded-full"
             >
-              <img src="/src/assets/Emotions/emo-1.png" alt="" srcset="" />
+              <img src={emo1} alt="strongly agree" srcset="" />
             </a>
             <a
               type="button"
               onClick={() => storeRate(2)}
               className="mr-2 mb-2 hover:bg-sky-200 p-2 rounded-full"
             >
-              <img src="/src/assets/Emotions/emo-2.png" alt="" srcset="" />
+              <img src={emo2} alt="agree" srcset="" />
             </a>
             <a
               type="button"
               onClick={() => storeRate(3)}
               className="mr-2 mb-2 hover:bg-green-200 p-2 rounded-full"
             >
-              <img src="/src/assets/Emotions/emo-3.png" alt="" srcset="" />
+              <img src={emo3} alt="neutral" srcset="" />
             </a>
             <a
               type="button"
               onClick={() => storeRate(4)}
               className="mr-2 mb-2 hover:bg-orange-200 p-2 rounded-full"
             >
-              <img src="/src/assets/Emotions/emo-4.png" alt="" srcset="" />
+              <img src={emo4} alt="disagree" srcset="" />
             </a>
             <a
               type="button"
               onClick={() => storeRate(5)}
               className="mr-2 mb-2 hover:bg-red-200 p-2 rounded-full"
             >
-              <img src="/src/assets/Emotions/emo-5.png" alt="" srcset="" />
+              <img src={emo5} alt="strongly disagree" srcset="" />
             </a>
           </div>
           <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">

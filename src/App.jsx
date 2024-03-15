@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AdminLogin from "./admin/AdminLogin";
 import AdminControl from "./admin/AdminControl";
 import AdminCreate from "./admin/AdminCreate";
-import AdminGet from "./admin/AdminGet";
 import AdminUpdateProfile from "./admin/AdminUpdateProfile";
 import { User } from "lucide-react";
 
@@ -28,7 +27,6 @@ function App() {
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admin/control" element={<AdminControl />} />
         <Route path="/admin/control/create" element={<AdminCreate />} />
-        <Route path="/admin/control/get" element={<AdminGet />} />
         <Route path="/admin/control/update" element={<AdminUpdateProfile/>} />
       </Routes>
     </Router>

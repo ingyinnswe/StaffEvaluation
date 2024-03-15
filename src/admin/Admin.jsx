@@ -33,6 +33,7 @@ const Admin = () => {
 
   useEffect(() => {
     console.log("Total Ratings:", totalRatings);
+    console.log("type of  totalRatings:", typeof totalRatings);
   }, [totalRatings]);
   //for the purpose of checking total ratings. must be removed
 
@@ -44,15 +45,12 @@ const Admin = () => {
   //   };
   const handleDeleteUserClick = async (userId) => {
     try {
-      const response = await fetch(
-        `${API_URL}/api/admin/votes/${userId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/admin/votes/${userId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.ok) {
         // If deletion is successful, update UI
@@ -71,6 +69,7 @@ const Admin = () => {
   const handleUpdateProfileClick = () => {
     navigate("/admin/control/update");
   };
+
   return (
     <>
       <main>
@@ -78,7 +77,7 @@ const Admin = () => {
           <WelcomeBanner />
           <div className="grid grid-cols-12 gap-6">
             <DashboardCard06 />
-            <DashboardCard04 />
+            {/* <DashboardCard04 /> */}
           </div>
 
           <div className="flex flex-auto flex-row-reverse flex-wrap">
@@ -169,9 +168,34 @@ const Admin = () => {
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
+                        {/* <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+                          <div
+                            className="bg-blue-600 h-1.5 rounded-full"
+                            style={{ width: `45%` }}
+                          ></div>
+                        </div> */}
                         {totalRatings &&
                           totalRatings[returnData[userId].username] &&
-                          totalRatings[returnData[userId].username]["Euphoric"]}
+                          totalRatings[returnData[userId].username][
+                            "Euphoric"
+                          ] && (
+                            <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+                              <div
+                                className="bg-blue-600 h-1.5 rounded-full"
+                                style={{
+                                  width: `${
+                                    totalRatings[returnData[userId].username][
+                                      "Euphoric"
+                                    ]["percent"]
+                                  }%`,
+                                }}
+                              ></div>
+                            </div>
+                          )}
+
+                        {/* {totalRatings &&
+                          totalRatings[returnData[userId].username] &&
+                          totalRatings[returnData[userId].username]["Euphoric"]} */}
                       </td>
                       <td
                         scope="row"
@@ -181,7 +205,20 @@ const Admin = () => {
                           totalRatings[returnData[userId].username] &&
                           totalRatings[returnData[userId].username][
                             "Innovative"
-                          ]}
+                          ] && (
+                            <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+                              <div
+                                className="bg-green-400 h-1.5 rounded-full"
+                                style={{
+                                  width: `${
+                                    totalRatings[returnData[userId].username][
+                                      "Innovative"
+                                    ]["percent"]
+                                  }%`,
+                                }}
+                              ></div>
+                            </div>
+                          )}
                       </td>
                       <td
                         scope="row"
@@ -191,7 +228,20 @@ const Admin = () => {
                           totalRatings[returnData[userId].username] &&
                           totalRatings[returnData[userId].username][
                             "Counterbalance"
-                          ]}
+                          ] && (
+                            <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+                              <div
+                                className="bg-orange-400 h-1.5 rounded-full"
+                                style={{
+                                  width: `${
+                                    totalRatings[returnData[userId].username][
+                                      "Counterbalance"
+                                    ]["percent"]
+                                  }%`,
+                                }}
+                              ></div>
+                            </div>
+                          )}
                       </td>
                       <td
                         scope="row"
@@ -201,7 +251,20 @@ const Admin = () => {
                           totalRatings[returnData[userId].username] &&
                           totalRatings[returnData[userId].username][
                             "Supervision"
-                          ]}
+                          ] && (
+                            <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+                              <div
+                                className="bg-red-400 h-1.5 rounded-full"
+                                style={{
+                                  width: `${
+                                    totalRatings[returnData[userId].username][
+                                      "Supervision"
+                                    ]["percent"]
+                                  }%`,
+                                }}
+                              ></div>
+                            </div>
+                          )}
                       </td>
                       <td
                         scope="row"
@@ -209,15 +272,13 @@ const Admin = () => {
                       >
                         {totalRatings &&
                           totalRatings[returnData[userId].username] &&
-                          totalRatings[returnData[userId].username][
-                            "Average"
-                          ]}
+                          totalRatings[returnData[userId].username]["Average"]}
                       </td>
                       <td
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
-                        <button className="p-2">
+                        {/* <button className="p-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -237,7 +298,7 @@ const Admin = () => {
                               d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                             />
                           </svg>
-                        </button>
+                        </button> */}
                         {/* <button className="p-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
