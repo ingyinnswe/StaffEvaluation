@@ -1,4 +1,4 @@
-import React, { useContext, useState , useEffect} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { TokenContext } from "../App";
 import WelcomeBanner from "../partials/dashboard/WelcomeBanner";
@@ -7,35 +7,35 @@ import DashboardCard05 from "../partials/dashboard/DashboardCard05";
 import DashboardCard06 from "@/partials/dashboard/DashboardCard06";
 import useTotalRatings from "./useTotalRating";
 
-const AdminControl = () => {
+const Admin = () => {
   let navigate = useNavigate();
   const { token } = useContext(TokenContext);
   const [returnData, setReturnData] = useState(null);
   const API_URL = import.meta.env.VITE_API_URL;
-  useEffect(()=>{
+  useEffect(() => {
     const getAllUsers = async () => {
       try {
-            const response = await fetch(`${API_URL}/api/admin/users`, {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            });
-      
-            const data = await response.json();
-            setReturnData(data);
-          } catch (error) {
-            console.error("Error:", error);
-          }
+        const response = await fetch(`${API_URL}/api/admin/users`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await response.json();
+        setReturnData(data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
     };
     getAllUsers();
-  },[]);
+  }, []);
   const totalRatings = useTotalRatings(returnData);
 
   useEffect(() => {
     console.log("Total Ratings:", totalRatings);
   }, [totalRatings]);
   //for the purpose of checking total ratings. must be removed
-  
+
   const handleCreateUserClick = () => {
     navigate("/admin/control/create");
   };
@@ -107,7 +107,7 @@ const AdminControl = () => {
           </div>
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg my-8">
             {returnData ? (
-              <table className="table-fixed w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <table className="table w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                   <tr className="border text-indigo-600">
                     <th scope="col" className="px-6 py-3">
@@ -120,19 +120,19 @@ const AdminControl = () => {
                       Name
                     </th>
                     <th scope="col" className="px-6 py-3">
-                     Euphoric
+                      Euphoric
                     </th>
                     <th scope="col" className="px-6 py-3">
-                     Innovative
+                      Innovative
                     </th>
                     <th scope="col" className="px-6 py-3">
-                     Counterbalance
+                      Counterbalance
                     </th>
                     <th scope="col" className="px-6 py-3">
-                     Supervision
+                      Supervision
                     </th>
                     <th scope="col" className="px-6 py-3">
-                     Self-motivations
+                      Self-motivations
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Actions
@@ -166,23 +166,51 @@ const AdminControl = () => {
                       <td
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                      ></td>
+                      >
+                        {totalRatings &&
+                          totalRatings[returnData[userId].username] &&
+                          totalRatings[returnData[userId].username]["Euphoric"]}
+                      </td>
                       <td
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                      ></td>
+                      >
+                        {totalRatings &&
+                          totalRatings[returnData[userId].username] &&
+                          totalRatings[returnData[userId].username][
+                            "Innovative"
+                          ]}
+                      </td>
                       <td
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                      ></td>
+                      >
+                        {totalRatings &&
+                          totalRatings[returnData[userId].username] &&
+                          totalRatings[returnData[userId].username][
+                            "Counterbalance"
+                          ]}
+                      </td>
                       <td
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                      ></td>
+                      >
+                        {totalRatings &&
+                          totalRatings[returnData[userId].username] &&
+                          totalRatings[returnData[userId].username][
+                            "Supervision"
+                          ]}
+                      </td>
                       <td
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                      ></td>
+                      >
+                        {totalRatings &&
+                          totalRatings[returnData[userId].username] &&
+                          totalRatings[returnData[userId].username][
+                            "Average"
+                          ]}
+                      </td>
                       <td
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -259,4 +287,4 @@ const AdminControl = () => {
   );
 };
 
-export default AdminControl;
+export default Admin;
