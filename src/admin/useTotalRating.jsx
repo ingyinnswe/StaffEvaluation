@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 
 const useTotalRatings = (returnData) => {
   const [totalRatings, setTotalRatings] = useState({});
+  const [overall, setOverall] = useState({});
 
   useEffect(() => {
+    const newTotalRatings = {};
+    const totalVariableRatings = {};
     if (returnData && returnData.length > 0) {
-      const newTotalRatings = {};
 
       returnData.forEach(user => {
         if (user && user.votes) {
@@ -19,10 +21,13 @@ const useTotalRatings = (returnData) => {
                 newTotalRatings[votedForUsername] = {};
               }
               if (!newTotalRatings[votedForUsername][variable]) {
-                newTotalRatings[votedForUsername][variable] = 0;
+                newTotalRatings[votedForUsername][variable] = { totalRating: 0, numVotes: 0 };
               }
 
-              newTotalRatings[votedForUsername][variable] += rating;
+              newTotalRatings[votedForUsername][variable].totalRating += rating;
+              newTotalRatings[votedForUsername][variable].numVotes++;
+
+              newTotalRatings[votedForUsername][variable].percent = (newTotalRatings[votedForUsername][variable].totalRating / newTotalRatings[votedForUsername][variable].numVotes)*20;
             }
           });
         }
@@ -33,22 +38,48 @@ const useTotalRatings = (returnData) => {
         let numVariables = 0;
         
         for (const variable in userRatings) {
-          totalRatingSum += userRatings[variable];
+          totalRatingSum += ((userRatings[variable].percent)/20);
           numVariables++;
         }
-      
+
+        // for (const variable in userRatings) {
+        //  userRatings[variable] = ((userRatings[variable]/ totalRatingSum) * 100).toFixed(1); 
+        // }
         // Calculate the average rating
-        const averageRating = numVariables > 0 ? totalRatingSum / numVariables : 0;
+        const averageRating = (numVariables > 0 ? totalRatingSum / numVariables : 0).toFixed(2);
       
         // Add the average rating to the user's ratings object
         userRatings['Average'] = averageRating;
       }
 
-      setTotalRatings(newTotalRatings);
+      for (const username in newTotalRatings) {
+        const userRatings = newTotalRatings[username];
+      
+        for (const variable in userRatings) {
+          if (variable === 'Average') {
+            continue;
+          }
+          // Initialize the variable's ratings object if it doesn't exist
+          if (!totalVariableRatings[variable]) {
+            totalVariableRatings[variable] = { total: 0, count: 0 };
+          }
+      
+          // Add the rating to the total and increment the number of votes
+          totalVariableRatings[variable].total += userRatings[variable].percent;
+          totalVariableRatings[variable].count++;
+        }
+      }
+      
+      // Calculate the average rating for each variable
+      for (const variable in totalVariableRatings) {
+        totalVariableRatings[variable].averagePercent = totalVariableRatings[variable].total / totalVariableRatings[variable].count;
+      }
     }
+    setTotalRatings(newTotalRatings);
+    setOverall(totalVariableRatings);
   }, [returnData]);
 
-  return totalRatings;
+  return {totalRatings, overall};
 };
 
 export default useTotalRatings;
