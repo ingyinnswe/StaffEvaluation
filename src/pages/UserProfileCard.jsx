@@ -42,7 +42,7 @@ const UserProfileCard = () => {
         <div
           id={info._id}
           key={index}
-          className={`baseCard w-full h-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-20
+          className={`baseCard w-full h-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700
         `}
         >
           <img
