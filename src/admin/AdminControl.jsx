@@ -14,15 +14,15 @@ const AdminControl = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   let navigate = useNavigate();
   const { token } = useContext(TokenContext);
-  const handleCreateUserClick = () => {
-    navigate("/admin/control/create");
-  };
-  const handleGetUserClick = () => {
-    navigate("/admin/control/get");
-  };
-  const handleUpdateProfileClick = () => {
-    navigate("/admin/control/update");
-  };
+  // const handleCreateUserClick = () => {
+  //   navigate("/admin/control/create");
+  // };
+  // const handleGetUserClick = () => {
+  //   navigate("/admin/control/get");
+  // };
+  // const handleUpdateProfileClick = () => {
+  //   navigate("/admin/control/update");
+  // };
   return (
     <>
       <div className="flex h-screen overflow-hidden">
