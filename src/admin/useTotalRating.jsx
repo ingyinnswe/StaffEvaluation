@@ -36,13 +36,15 @@ const useTotalRatings = (returnData) => {
           totalRatingSum += userRatings[variable];
           numVariables++;
         }
-        
-        // Convert each variable value to a percentage of the total
+
         for (const variable in userRatings) {
-          userRatings[variable] = (userRatings[variable] / totalRatingSum) * 100;
+         userRatings[variable] = ((userRatings[variable]/ totalRatingSum) * 100).toFixed(1); 
         }
+
+      
+      
         // Calculate the average rating
-        const averageRating = numVariables > 0 ? totalRatingSum / numVariables : 0;
+        const averageRating = (numVariables > 0 ? totalRatingSum / numVariables : 0).toFixed(2);
       
         // Add the average rating to the user's ratings object
         userRatings['Average'] = averageRating;
