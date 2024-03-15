@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import infoData from "./infoData";
 import Popup from "./Popup";
 import { UserIdContext, UserDataContext } from "@/App";
 
 const UserProfileCard = () => {
-  const { userId } = useContext(UserIdContext);
+  const { userId, setUserId } = useContext(UserIdContext);
   const { userData, setUserData } = useContext(UserDataContext);
   const [variable, setVariable] = useState('');
+  let navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
@@ -19,6 +21,17 @@ const UserProfileCard = () => {
       fetchData();
     }
   }, [userId, API_URL]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      alert('You have been inactive for 10 seconds, redirecting to sign in page');
+      navigate('/')
+      setUserId(null);
+      setUserData(null)
+    }, 10000);
+
+    return () => clearTimeout(timer); // This will clear the timer when the component unmounts
+  }, []);
 
   const [showPopup, setShowPopup] = useState(false);
 
