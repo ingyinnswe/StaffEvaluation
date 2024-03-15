@@ -77,7 +77,7 @@ const Admin = () => {
           <WelcomeBanner />
           <div className="grid grid-cols-12 gap-6">
             <DashboardCard06 />
-            <DashboardCard04 />
+            {/* <DashboardCard04 /> */}
           </div>
 
           <div className="flex flex-auto flex-row-reverse flex-wrap">
@@ -278,7 +278,7 @@ const Admin = () => {
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
-                        <button className="p-2">
+                        {/* <button className="p-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -298,7 +298,7 @@ const Admin = () => {
                               d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                             />
                           </svg>
-                        </button>
+                        </button> */}
                         {/* <button className="p-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

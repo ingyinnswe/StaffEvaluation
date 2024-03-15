@@ -74,7 +74,7 @@ function DoughnutChart({
               li.style.margin = tailwindConfig().theme.margin[1];
               // Button element
               const button = document.createElement('button');
-              button.classList.add('btn-xs', 'bg-white', 'dark:bg-slate-800', 'text-slate-500', 'dark:text-slate-400', 'border', 'border-slate-200', 'dark:border-slate-700', 'shadow-md');
+              button.classList.add('btn-s','flex','flex-wrap', 'bg-white', 'dark:bg-slate-800', 'text-slate-500', 'dark:text-slate-400', 'border', 'border-slate-200', 'dark:border-slate-700', 'shadow-md', 'p-1', 'rounded');
               button.style.opacity = item.hidden ? '.3' : '';
               button.onclick = () => {
                 c.toggleDataVisibility(item.index);
@@ -87,8 +87,11 @@ function DoughnutChart({
               box.style.height = tailwindConfig().theme.height[2];
               box.style.backgroundColor = item.fillStyle;
               box.style.borderRadius = tailwindConfig().theme.borderRadius.sm;
-              box.style.marginRight = tailwindConfig().theme.margin[1];
+              box.style.marginRight = tailwindConfig().theme.margin[2];
               box.style.pointerEvents = 'none';
+              box.style.marginTop = tailwindConfig().theme.margin["auto"];
+              box.style.marginBottom = tailwindConfig().theme.margin["auto"];
+              
               // Label
               const label = document.createElement('span');
               label.style.display = 'flex';
