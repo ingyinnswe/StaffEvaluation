@@ -186,7 +186,7 @@ const Admin = () => {
                                   width: `${
                                     totalRatings[returnData[userId].username][
                                       "Euphoric"
-                                    ]
+                                    ]["percent"]
                                   }%`,
                                 }}
                               ></div>
@@ -213,7 +213,7 @@ const Admin = () => {
                                   width: `${
                                     totalRatings[returnData[userId].username][
                                       "Innovative"
-                                    ]
+                                    ]["percent"]
                                   }%`,
                                 }}
                               ></div>
@@ -236,7 +236,7 @@ const Admin = () => {
                                   width: `${
                                     totalRatings[returnData[userId].username][
                                       "Counterbalance"
-                                    ]
+                                    ]["percent"]
                                   }%`,
                                 }}
                               ></div>
@@ -259,7 +259,7 @@ const Admin = () => {
                                   width: `${
                                     totalRatings[returnData[userId].username][
                                       "Supervision"
-                                    ]
+                                    ]["percent"]
                                   }%`,
                                 }}
                               ></div>

@@ -19,10 +19,13 @@ const useTotalRatings = (returnData) => {
                 newTotalRatings[votedForUsername] = {};
               }
               if (!newTotalRatings[votedForUsername][variable]) {
-                newTotalRatings[votedForUsername][variable] = 0;
+                newTotalRatings[votedForUsername][variable] = { totalRating: 0, numVotes: 0 };
               }
 
-              newTotalRatings[votedForUsername][variable] += rating;
+              newTotalRatings[votedForUsername][variable].totalRating += rating;
+              newTotalRatings[votedForUsername][variable].numVotes++;
+
+              newTotalRatings[votedForUsername][variable].percent = (newTotalRatings[votedForUsername][variable].totalRating / newTotalRatings[votedForUsername][variable].numVotes)*20;
             }
           });
         }
@@ -33,13 +36,13 @@ const useTotalRatings = (returnData) => {
         let numVariables = 0;
         
         for (const variable in userRatings) {
-          totalRatingSum += userRatings[variable];
+          totalRatingSum += ((userRatings[variable].percent)/20);
           numVariables++;
         }
 
-        for (const variable in userRatings) {
-         userRatings[variable] = ((userRatings[variable]/ totalRatingSum) * 100).toFixed(1); 
-        }
+        // for (const variable in userRatings) {
+        //  userRatings[variable] = ((userRatings[variable]/ totalRatingSum) * 100).toFixed(1); 
+        // }
 
       
       
