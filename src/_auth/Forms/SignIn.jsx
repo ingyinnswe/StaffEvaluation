@@ -38,7 +38,7 @@ function signIn() {
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           className="mx-auto h-36 w-auto logo"
-          src="./src/assets/ric-logo.png"
+          src="../src/assets/ric-logo.png"
           alt="RIC logo"></img>
         <form
           onSubmit={handleSubmit}
