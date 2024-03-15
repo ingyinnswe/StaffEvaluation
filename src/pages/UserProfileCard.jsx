@@ -28,7 +28,7 @@ const UserProfileCard = () => {
       navigate('/')
       setUserId(null);
       setUserData(null)
-    }, 10000);
+    }, 500000);
 
     return () => clearTimeout(timer); // This will clear the timer when the component unmounts
   }, []);

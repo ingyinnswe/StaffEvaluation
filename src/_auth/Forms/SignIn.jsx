@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useContext, useState} from "react";
 import { UserIdContext } from '@/App';
+import logo from '@/assets/ric-logo.png';
 // import { isElementAccessExpression } from "typescript";
 
 function signIn() {
@@ -38,7 +39,7 @@ function signIn() {
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           className="mx-auto h-36 w-auto logo"
-          src="../src/assets/ric-logo.png"
+          src={logo}
           alt="RIC logo"></img>
         <form
           onSubmit={handleSubmit}
