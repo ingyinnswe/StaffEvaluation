@@ -1,29 +1,55 @@
-import React, {useContext} from "react";
-import { UserIdContext, UserDataContext} from '@/App';
+import React, { useContext } from "react";
+import { UserIdContext, UserDataContext } from "@/App";
+import { questionSets } from "./questionSets";
 
-const Popup = ({ imageURL,votedFor, variable, name, jobTitle, nickname, onClose }) => {
-    const API_URL = import.meta.env.VITE_API_URL;
-    const { userId } = useContext(UserIdContext);
-    const storeRate = (rating) => {
-        const fetchData = async () => {
-          console.log(JSON.stringify({ userId, votedFor, variable, rating}))
-            const response = await fetch(`${API_URL}/api/votes`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ userId, votedFor, variable, rating}),
-            });
-            const data = await response.json();
-            if(response.ok){
-              alert("Voting submitted successfully");
-            }
-            else{
-              alert(`Voting failed ${data.msg}`)
-            }
-        };
-        fetchData();
+const Popup = ({
+  imageURL,
+  votedFor,
+  variable,
+  name,
+  jobTitle,
+  nickname,
+  onClose,
+}) => {
+  const API_URL = import.meta.env.VITE_API_URL;
+  const { userId } = useContext(UserIdContext);
+  
+  // Function to select a random question from the question set
+  const getRandomQuestion = (variable) => {
+    const subtypes = Object.keys(questionSets[variable]); // Get all subtypes
+    const randomSubtype = subtypes[Math.floor(Math.random() * subtypes.length)]; // Select a random subtype
+    const questions = questionSets[variable][randomSubtype]; // Get questions for the selected subtype
+  
+    console.log("Variable:", variable);
+    console.log("Subtype:", randomSubtype);
+    console.log("Questions:", questions);
+
+    if (questions && questions.length > 0) {
+      const randomIndex = Math.floor(Math.random() * questions.length);
+      return questions[randomIndex];
     }
+    return "";
+  };
+
+  const storeRate = (rating) => {
+    const fetchData = async () => {
+      console.log(JSON.stringify({ userId, votedFor, variable, rating }));
+      const response = await fetch(`${API_URL}/api/votes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId, votedFor, variable, rating }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert("Voting submitted successfully");
+      } else {
+        alert(`Voting failed ${data.msg}`);
+      }
+    };
+    fetchData();
+  };
   return (
     <div className="fixed inset-0 z-10 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -47,17 +73,50 @@ const Popup = ({ imageURL,votedFor, variable, name, jobTitle, nickname, onClose 
             />
             <h4 className="mb-3 text-lg font-semibold">{name}</h4>
             <p className="mb-2 text-sm text-gray-600">{jobTitle}</p>
-            <p className="mb-4 text-base font-semibold text-gray-800">{nickname}</p>
-            <p className="mb-4 text-green-600 text-sm italic">He finds an inspiring haven where passion and productivity seamlessly converge at his workspace.</p>
-            
+            <p className="mb-4 text-base font-semibold text-gray-800">
+              {nickname}
+            </p>
+            {/* Display a random question for the selected variable */}
+            <p id="variable" className="mb-4 text-green-600 text-sm italic">
+              {getRandomQuestion(variable)}
+            </p>
 
             {/* rating buttons */}
-            <a type="button" onClick={()=>storeRate(1)} className="mr-2 mb-2 hover:bg-violet-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-1.png" alt="" srcset="" /></a>
-            <a type="button" onClick={()=>storeRate(2)} className="mr-2 mb-2 hover:bg-sky-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-2.png" alt="" srcset="" /></a>
-            <a type="button" onClick={()=>storeRate(3)} className="mr-2 mb-2 hover:bg-green-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-3.png" alt="" srcset="" /></a>
-            <a type="button" onClick={()=>storeRate(4)} className="mr-2 mb-2 hover:bg-orange-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-4.png" alt="" srcset="" /></a>
-            <a type="button" onClick={()=>storeRate(5)} className="mr-2 mb-2 hover:bg-red-200 p-2 rounded-full"><img src="/src/assets/Emotions/emo-5.png" alt="" srcset="" /></a>
-            
+            <a
+              type="button"
+              onClick={() => storeRate(1)}
+              className="mr-2 mb-2 hover:bg-violet-200 p-2 rounded-full"
+            >
+              <img src="/src/assets/Emotions/emo-1.png" alt="" srcset="" />
+            </a>
+            <a
+              type="button"
+              onClick={() => storeRate(2)}
+              className="mr-2 mb-2 hover:bg-sky-200 p-2 rounded-full"
+            >
+              <img src="/src/assets/Emotions/emo-2.png" alt="" srcset="" />
+            </a>
+            <a
+              type="button"
+              onClick={() => storeRate(3)}
+              className="mr-2 mb-2 hover:bg-green-200 p-2 rounded-full"
+            >
+              <img src="/src/assets/Emotions/emo-3.png" alt="" srcset="" />
+            </a>
+            <a
+              type="button"
+              onClick={() => storeRate(4)}
+              className="mr-2 mb-2 hover:bg-orange-200 p-2 rounded-full"
+            >
+              <img src="/src/assets/Emotions/emo-4.png" alt="" srcset="" />
+            </a>
+            <a
+              type="button"
+              onClick={() => storeRate(5)}
+              className="mr-2 mb-2 hover:bg-red-200 p-2 rounded-full"
+            >
+              <img src="/src/assets/Emotions/emo-5.png" alt="" srcset="" />
+            </a>
           </div>
           <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button

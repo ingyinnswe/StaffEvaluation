@@ -88,7 +88,7 @@ const UserProfileCard = () => {
                 Supervision
               </a>
               <a
-                onClick={()=>openPopup('Counter Balance')}
+                onClick={()=>openPopup('Counterbalance')}
                 type="button"
                 className="text-gray-900 bg-blue-200 hover:text-white hover:bg-blue-500 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
               >
