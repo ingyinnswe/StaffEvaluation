@@ -19,10 +19,16 @@ const AdminCreate = () => {
             body: formData
             });
 
-            const jsonData = await response.json();
-            console.log(jsonData);
+            // const jsonData = await response.json();
+            if(response.ok){
+                alert('User created successfully');
+                form.reset();
+            }
+            else{
+                alert('Error: Server Disconnected')
+            }
         } catch (error) {
-            console.error('Error:', error);
+            alert('Error:', error);
         }
     };
 
