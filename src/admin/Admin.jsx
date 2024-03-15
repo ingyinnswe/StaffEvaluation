@@ -42,30 +42,26 @@ const Admin = () => {
   //   const handleGetUserClick = () => {
   //     navigate("/admin/control/get");
   //   };
-  const handleDeleteUserClick = async (username) => {
+  const handleDeleteUserClick = async (userId) => {
     try {
-      const response = await fetch(`${API_URL}/api/admin/users/${username}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      console.log("Response status:", response.status);
+      const response = await fetch(
+        `${API_URL}/api/admin/votes/${userId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
-        // Delete user from returnData
-        const updatedData = { ...returnData };
-        // Assuming each user has a unique username
-        const userIdToDelete = Object.keys(updatedData).find(
-          (key) => updatedData[key].username === username
-        );
-        delete updatedData[userIdToDelete];
-        setReturnData(updatedData);
+        // If deletion is successful, update UI
+        // You may choose to refetch the user list or remove the user from the state directly
         console.log("User deleted successfully");
+        // Example: refetch user list
+        handleGetUsers();
       } else {
-        const errorData = await response.json(); // Assuming server returns JSON error messages
-        console.error("Failed to delete user. Server error:", errorData);
+        console.error("Failed to delete user");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -151,6 +147,12 @@ const Admin = () => {
                       >
                         {userId}
                       </td>
+                      {/* <td
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      >
+                        {userId.username}
+                      </td> */}
                       <td
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
