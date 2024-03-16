@@ -24,10 +24,6 @@ const Popup = ({
     const subtypes = Object.keys(questionSets[variable]); // Get all subtypes
     const randomSubtype = subtypes[Math.floor(Math.random() * subtypes.length)]; // Select a random subtype
     const questions = questionSets[variable][randomSubtype]; // Get questions for the selected subtype
-  
-    console.log("Variable:", variable);
-    console.log("Subtype:", randomSubtype);
-    console.log("Questions:", questions);
 
     if (questions && questions.length > 0) {
       const randomIndex = Math.floor(Math.random() * questions.length);
@@ -49,6 +45,7 @@ const Popup = ({
       const data = await response.json();
       if (response.ok) {
         alert("Voting submitted successfully");
+        onClose();
       } else {
         alert(`Voting failed ${data.msg}`);
       }
