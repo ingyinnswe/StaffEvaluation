@@ -56,7 +56,7 @@ const Admin = () => {
           <WelcomeBanner />
           <div className="grid grid-cols-12 gap-6">
             <DashboardCard06 overall={overall}/>
-            {/* <DashboardCard04 /> */}
+            <DashboardCard04 />
           </div>
 
           <div className="flex flex-auto flex-row-reverse flex-wrap">
@@ -294,7 +294,7 @@ const Admin = () => {
                             />
                           </svg>
                         </button> */}
-                        <button onClick={handleDeleteUserClick} className="p-2">
+                        <button className="p-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
