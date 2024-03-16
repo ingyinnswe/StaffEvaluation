@@ -12,6 +12,7 @@ const Admin = () => {
   const { token } = useContext(TokenContext);
   const [returnData, setReturnData] = useState(null);
   const API_URL = import.meta.env.VITE_API_URL;
+  const [refreshData, setRefreshData] = useState(false);
   useEffect(() => {
     const getAllUsers = async () => {
       try {
@@ -28,7 +29,26 @@ const Admin = () => {
       }
     };
     getAllUsers();
-  }, []);
+  }, [refreshData]);
+  async function handleDelete(id) {
+    try {
+      const response = await fetch(`${API_URL}/api/admin/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert("User deleted successfully");
+        setRefreshData(!refreshData);
+      } else {
+        alert(`Delete failed. Try again.`);
+      }
+    } catch (error) {
+      alert("Error:", error);
+    }
+  }
   const {totalRatings, overall} = useTotalRatings(returnData);
   console.log("overall", overall);
 
@@ -294,7 +314,7 @@ const Admin = () => {
                             />
                           </svg>
                         </button> */}
-                        <button className="p-2">
+                        <button className="p-2" onClick={()=>handleDelete(returnData[userId]._id)}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"

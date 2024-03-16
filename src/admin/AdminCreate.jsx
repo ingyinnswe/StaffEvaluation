@@ -4,9 +4,11 @@ import { TokenContext } from '../App';
 const AdminCreate = () => {
     const {token} = useContext(TokenContext);
     const API_URL = import.meta.env.VITE_API_URL;
+    const [loading, isLoading] = useState(false);
 
     const handleCreateUser = async (event) => {
         event.preventDefault();
+        isLoading(true);
         const form = event.target;
         const formData = new FormData(form);
 
@@ -23,9 +25,11 @@ const AdminCreate = () => {
             if(response.ok){
                 alert('User created successfully');
                 form.reset();
+                isLoading(false);
             }
             else{
-                alert('Error: Server Disconnected')
+                alert('User created failed. Please try again.')
+                isLoading(false);
             }
         } catch (error) {
             alert('Error:', error);
@@ -42,9 +46,9 @@ const AdminCreate = () => {
                 <input type="text" name="jobTitle" placeholder="Job Title" className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 m-3" required />
                 <textarea name="jobDescription" placeholder="Job Description" className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 m-3" required />
                 <input type="file" name="profilePicture" className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 m-3" required />
-                <button type="submit" className="flex justify-center w-full mt-5 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 m-3">Create User</button>
+                <button type="submit" className="flex justify-center w-full mt-5 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 m-3" disabled={loading}>{loading ? "Loading...": "Create User"}</button>
+                <button type='button' className="flex justify-center w-full mt-5 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 m-3" onClick={() => window.history.back()}>Back</button>
             </form>
-            <button className="flex justify-center w-full mt-5 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={() => window.history.back()}>Back</button>
         </div>
         </div>
     
