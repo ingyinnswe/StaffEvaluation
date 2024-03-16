@@ -30,6 +30,7 @@ const Admin = () => {
     getAllUsers();
   }, []);
   const {totalRatings, overall} = useTotalRatings(returnData);
+  console.log("overall", overall);
 
   // useEffect(() => {
   //   console.log("Total Ratings:", totalRatings);
@@ -43,29 +44,7 @@ const Admin = () => {
   //   const handleGetUserClick = () => {
   //     navigate("/admin/control/get");
   //   };
-  const handleDeleteUserClick = async (userId) => {
-    try {
-      const response = await fetch(`${API_URL}/api/admin/votes/${userId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        // If deletion is successful, update UI
-        // You may choose to refetch the user list or remove the user from the state directly
-        console.log("User deleted successfully");
-        // Example: refetch user list
-        handleGetUsers();
-      } else {
-        console.error("Failed to delete user");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
+ 
   const handleUpdateProfileClick = () => {
     navigate("/admin/control/update");
   };
@@ -77,7 +56,7 @@ const Admin = () => {
           <WelcomeBanner />
           <div className="grid grid-cols-12 gap-6">
             <DashboardCard06 overall={overall}/>
-            {/* <DashboardCard04 /> */}
+            <DashboardCard04 />
           </div>
 
           <div className="flex flex-auto flex-row-reverse flex-wrap">
@@ -315,7 +294,7 @@ const Admin = () => {
                             />
                           </svg>
                         </button> */}
-                        <button onClick={handleDeleteUserClick} className="p-2">
+                        <button className="p-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"

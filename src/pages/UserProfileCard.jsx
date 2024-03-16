@@ -82,28 +82,28 @@ const UserProfileCard = () => {
               <a
                 onClick={()=>openPopup('Euphoric')}
                 type="button"
-                className="text-gray-900 bg-green-200 hover:text-white hover:bg-green-500 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2 "
+                className= " text-xs text-gray-900 bg-green-200 hover:text-white hover:bg-green-500 focus:ring-4 focus:outline-none  font-medium rounded-lg  px-3 py-2 text-center me-2 mb-2 "
               >
                 Euphoric
               </a>
               <a
                 onClick={()=>openPopup('Innovative')}
                 type="button"
-                className="text-gray-900 bg-orange-200 hover:text-white hover:bg-orange-500  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
+                className= " text-xs text-gray-900 bg-orange-200 hover:text-white hover:bg-orange-500  focus:ring-4 focus:outline-none  font-medium rounded-lg  px-3 py-2 text-center me-2 mb-2"
               >
                 Innovative
               </a>
               <a
                 onClick={()=> openPopup('Supervision')}
                 type="button"
-                className="text-gray-900 bg-pink-200 hover:text-white hover:bg-pink-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
+                className= " text-xs text-gray-900 bg-pink-200 hover:text-white hover:bg-pink-500 focus:ring-4 focus:outline-none font-medium rounded-lg  px-3 py-2 text-center me-2 mb-2"
               >
                 Supervision
               </a>
               <a
                 onClick={()=>openPopup('Counterbalance')}
                 type="button"
-                className="text-gray-900 bg-blue-200 hover:text-white hover:bg-blue-500 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
+                className= " text-xs text-gray-900 bg-blue-200 hover:text-white hover:bg-blue-500 focus:ring-4 focus:outline-none  font-medium rounded-lg  px-3 py-2 text-center me-2 mb-2"
               >
                 Counter Balance
               </a>
