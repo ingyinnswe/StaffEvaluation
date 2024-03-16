@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 
 const useTotalRatings = (returnData) => {
   const [totalRatings, setTotalRatings] = useState({});
+  const [overall, setOverall] = useState({});
 
   useEffect(() => {
+    const newTotalRatings = {};
+    const totalVariableRatings = {};
     if (returnData && returnData.length > 0) {
-      const newTotalRatings = {};
 
       returnData.forEach(user => {
         if (user && user.votes) {
@@ -43,9 +45,6 @@ const useTotalRatings = (returnData) => {
         // for (const variable in userRatings) {
         //  userRatings[variable] = ((userRatings[variable]/ totalRatingSum) * 100).toFixed(1); 
         // }
-
-      
-      
         // Calculate the average rating
         const averageRating = (numVariables > 0 ? totalRatingSum / numVariables : 0).toFixed(2);
       
@@ -53,11 +52,34 @@ const useTotalRatings = (returnData) => {
         userRatings['Average'] = averageRating;
       }
 
-      setTotalRatings(newTotalRatings);
+      for (const username in newTotalRatings) {
+        const userRatings = newTotalRatings[username];
+      
+        for (const variable in userRatings) {
+          if (variable === 'Average') {
+            continue;
+          }
+          // Initialize the variable's ratings object if it doesn't exist
+          if (!totalVariableRatings[variable]) {
+            totalVariableRatings[variable] = { total: 0, count: 0 };
+          }
+      
+          // Add the rating to the total and increment the number of votes
+          totalVariableRatings[variable].total += userRatings[variable].percent;
+          totalVariableRatings[variable].count++;
+        }
+      }
+      
+      // Calculate the average rating for each variable
+      for (const variable in totalVariableRatings) {
+        totalVariableRatings[variable].averagePercent = totalVariableRatings[variable].total / totalVariableRatings[variable].count;
+      }
     }
+    setTotalRatings(newTotalRatings);
+    setOverall(totalVariableRatings);
   }, [returnData]);
 
-  return totalRatings;
+  return {totalRatings, overall};
 };
 
 export default useTotalRatings;

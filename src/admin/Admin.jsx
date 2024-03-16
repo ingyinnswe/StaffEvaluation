@@ -29,12 +29,12 @@ const Admin = () => {
     };
     getAllUsers();
   }, []);
-  const totalRatings = useTotalRatings(returnData);
+  const {totalRatings, overall} = useTotalRatings(returnData);
 
-  useEffect(() => {
-    console.log("Total Ratings:", totalRatings);
-    console.log("type of  totalRatings:", typeof totalRatings);
-  }, [totalRatings]);
+  // useEffect(() => {
+  //   console.log("Total Ratings:", totalRatings);
+  //   console.log("type of  totalRatings:", typeof totalRatings);
+  // }, [totalRatings]);
   //for the purpose of checking total ratings. must be removed
 
   const handleCreateUserClick = () => {
@@ -76,7 +76,7 @@ const Admin = () => {
         <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
           <WelcomeBanner />
           <div className="grid grid-cols-12 gap-6">
-            <DashboardCard06 />
+            <DashboardCard06 overall={overall}/>
             {/* <DashboardCard04 /> */}
           </div>
 
