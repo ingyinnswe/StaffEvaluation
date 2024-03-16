@@ -1,5 +1,10 @@
 import React,{useEffect, useState} from 'react';
-import DoughnutChart from '../../charts/DoughnutChart';
+// import DoughnutChart from '../../charts/DoughnutChart';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
 
 // Import utilities
 import { tailwindConfig } from '../../utils/Utils';
@@ -21,16 +26,15 @@ function DashboardCard06(overall) {
         }
       }
       setOverallRatings(updatedRatings);
-      console.log(overallRatings);
+      console.log(overallRatings[variables[0]]);
   },[overall])
 
   const chartData = {
+    labels: variables,
     datasets: [
       {
         label: 'Motivation',
-        data: [
-          20,20,20,20
-        ],
+        data: variables.map(variable => overallRatings[variable] || 0),
         backgroundColor: [
           tailwindConfig().theme.colors.indigo[500],
           tailwindConfig().theme.colors.blue[400],
@@ -55,7 +59,9 @@ function DashboardCard06(overall) {
       </header>
       {/* Chart built with Chart.js 3 */}
       {/* Change the height attribute to adjust the chart height */}
-      <DoughnutChart data={chartData} width={389} height={260} />
+      <div className="p-4">
+      {chartData && <Doughnut data={chartData} />}
+      </div>
     </div>
   );
 }
