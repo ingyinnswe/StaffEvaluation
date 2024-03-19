@@ -31,26 +31,27 @@ const Admin = () => {
     getAllUsers();
   }, [refreshData]);
   async function handleDelete(id) {
-    try {
-      const response = await fetch(`${API_URL}/api/admin/users/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      if (response.ok) {
-        alert("User deleted successfully");
-        setRefreshData(!refreshData);
-      } else {
-        alert(`Delete failed. Try again.`);
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      try {
+        const response = await fetch(`${API_URL}/api/admin/users/${id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        if (response.ok) {
+          alert("User deleted successfully");
+          setRefreshData(!refreshData);
+        } else {
+          alert(`Delete failed. Try again.`);
+        }
+      } catch (error) {
+        alert("Error:", error);
       }
-    } catch (error) {
-      alert("Error:", error);
     }
   }
   const {totalRatings, overall} = useTotalRatings(returnData);
-  console.log("overall", overall);
 
   // useEffect(() => {
   //   console.log("Total Ratings:", totalRatings);
