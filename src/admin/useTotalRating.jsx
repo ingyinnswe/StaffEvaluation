@@ -11,8 +11,13 @@ const useTotalRatings = (returnData) => {
 
       returnData.forEach(user => {
         if (user && user.votes) {
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
           user.votes.forEach(vote => {
-            if (vote && vote.votedFor && vote.votedFor.username && vote.variable) {
+            const voteDate = new Date(vote.createdAt);
+            voteDate.setHours(0, 0, 0, 0);
+            if (vote && vote.votedFor && vote.votedFor.username && vote.variable &&
+              voteDate.getTime() === today.getTime()){
               const votedForUsername = vote.votedFor.username;
               const variable = vote.variable;
               const rating = vote.rating ? vote.rating : 0; // Default to 0 if rating is null
